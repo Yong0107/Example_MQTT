@@ -62,10 +62,10 @@ int main(int argc, char *argv[])
 {
 	struct json_object *jobj;
 	mqtt_setup();
-	int h = -1000;
+	
 	
 	char *buf = malloc(64);
-	struct timeval te;
+	
   	while(1){ 
 		time_t clk = time(NULL);
 		jobj = json_object_new_object();
