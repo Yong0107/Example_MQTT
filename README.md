@@ -10,4 +10,4 @@ apt-get install libjson-c-dev
 
 compile program
 
-gcc -o mqtttest example_mqtt_.c -lmosquitto -ljson-c
+gcc -o mqtttest example_mqtt.c -lmosquitto -ljson-c
