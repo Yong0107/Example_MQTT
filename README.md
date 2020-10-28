@@ -12,4 +12,8 @@ compile program
 
 gcc -o mqtttest example_mqtt.c -lmosquitto -ljson-c
 
+excute program
+
+./mqtttest
+
 by Yong
