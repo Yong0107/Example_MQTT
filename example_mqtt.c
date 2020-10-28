@@ -13,9 +13,9 @@ void mosq_log_callback(struct mosquitto *mosq, void *userdata, int level, const 
 	/* Pring all log messages regardless of level. */
   
   switch(level){
-    case MOSQ_LOG_DEBUG:
-    case MOSQ_LOG_INFO:
-    case MOSQ_LOG_NOTICE:
+   // case MOSQ_LOG_DEBUG:
+  //  case MOSQ_LOG_INFO:
+  //  case MOSQ_LOG_NOTICE:
     case MOSQ_LOG_WARNING:
     case MOSQ_LOG_ERR: {
       printf("%i:%s\n", level, str);
