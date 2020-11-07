@@ -7,9 +7,18 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <json-c/json.h>
+#ifndef MQTTHOST
+#define MQTTHOST	"10.0.0.51"	//Define the MQTT broker's IP
+#endif
+#ifndef MQTTPORT
+#define MQTTPORT	1883		//Define the MQTT protocol's port
+#endif
 
-struct mosquitto *mosq = NULL;
-	char *mqtttopic = NULL;
+
+
+struct mosquitto *mosq = NULL;		//Define the MQTT instance
+char *mqtttopic = NULL;			//Define a mqtt topic
+struct json_object *jobj; //Json object.
 
 void mosq_log_callback(struct mosquitto *mosq, void *userdata, int level, const char *str)
 {
@@ -35,10 +44,8 @@ void mosq_log_callback(struct mosquitto *mosq, void *userdata, int level, const 
 	
 void mqtt_settingup(){
 
-	char *mqtthost = "10.0.0.51"; // Target host
-	int mqttport = 1883; // MQTT broker's port
 	bool clean_session = true;
-  	mqtttopic = "/PLC1/Slot1";    //This is the publish topic
+  	mqtttopic = "/PLC1/Slot1";    //Giving a MQTT publbish topic
   	int keepalive = 60;
 	
  	mosquitto_lib_init();
@@ -57,7 +64,7 @@ void mqtt_settingup(){
 	//str	the message string.
 
   
-  	if(mosquitto_connect(mosq, mqtthost, mqttport, keepalive)){
+  	if(mosquitto_connect(mosq, MQTTHOST, MQTTPORT, keepalive)){
 		fprintf(stderr, "Unable to connect.\n");
 		exit(1);
 	}
@@ -88,7 +95,6 @@ int mqtt_send(char *msg){
 
 int main(int argc, char *argv[])
 {
-	struct json_object *jobj; //Json object.
 	time_t clk; //timestamp object
 	mqtt_settingup();
 	
@@ -107,4 +113,5 @@ int main(int argc, char *argv[])
     		sleep(1);
 		json_object_put(jobj);
   	}
+
 }
